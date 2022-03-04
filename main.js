@@ -3,9 +3,11 @@ let bgColor = Math.trunc(Math.random() * 999999);
 document.querySelector("body").style.backgroundColor = `#${bgColor}`;
 
 //randomly genetating 5 numbers to array
-let container = [];
-for (i = 0; i < 5; i++) {
+let container = []; //declearing container array to hold 5 numbers
+container.length = ""; //writing this just to work in for loop below
+for (i = 0; container.length < 5; i++) {
   container.push(Math.trunc(Math.random() * 100));
+  container = [...new Set(container)]; //new Set to remove any duplicat array data
 }
 
 //selecting 1 number from above random gererated numbers
@@ -34,7 +36,7 @@ let successAudio = document.getElementById("successAudio");
 let loserAudio = document.getElementById("loserAudio");
 
 //total chances or game life to player is 3
-let life = 3;
+let life = 2;
 let remainingLife = document.getElementById("life");
 remainingLife.textContent = life;
 let message = document.getElementById("message");
@@ -62,6 +64,7 @@ for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function (e) {
     buttons[i].textContent = container[i];
     buttons[i].style.backgroundColor = "#ff7373";
+    buttons[i].disabled = true; //after 1 click the button is disabled, it wont take another click
     console.log(container[i]);
 
     if (buttons[i].textContent == selectedItem) {
